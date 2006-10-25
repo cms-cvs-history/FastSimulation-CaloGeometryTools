@@ -1,0 +1,16 @@
+<use name=root>
+<use name=Geometry/CaloEventSetup>
+<use name=Geometry/CaloGeometry>
+<use name=Geometry/EcalPreshowerAlgo>
+<use name=Geometry/CaloTopology>
+<use name=DataFormats/HcalDetId>
+<use name=DataFormats/EcalDetId>
+<use name=FWCore/Framework>
+<use name=FastSimulation/Utilities>
+<use name=FastSimulation/GeometryTools>
+<use name=FastSimulation/CaloHitMakers>
+<use name=FastSimulation/Utilities>
+
+<library file=testCaloGeometryTools.cc name=testCaloGeometryTools>
+<flags SEAL_PLUGIN_NAME="testCaloGeometryTools">
+</library>
