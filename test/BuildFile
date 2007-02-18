@@ -6,6 +6,8 @@
 <use name=DataFormats/HcalDetId>
 <use name=DataFormats/EcalDetId>
 <use name=FWCore/Framework>
+<use name=FWCore/ServiceRegistry>
+<use name=FWCore/Utilities>
 <use name=FastSimulation/Utilities>
 <use name=FastSimulation/CaloGeometryTools>
 <use name=FastSimulation/CaloHitMakers>
