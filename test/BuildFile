@@ -14,5 +14,5 @@
 <use name=FastSimulation/Utilities>
 
 <library file=testCaloGeometryTools.cc name=testCaloGeometryTools>
-<flags SEAL_PLUGIN_NAME="testCaloGeometryTools">
+<flags EDM_PLUGIN=1>
 </library>
