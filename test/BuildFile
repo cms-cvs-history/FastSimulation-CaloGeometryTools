@@ -16,3 +16,8 @@
 <library file=testCaloGeometryTools.cc name=testCaloGeometryTools>
 <flags EDM_PLUGIN=1>
 </library>
+
+
+<library file=testEcalHitMaker.cc name=testEcalHitMaker>
+<flags SEAL_PLUGIN_NAME="testEcalHitMaker">
+</library>
