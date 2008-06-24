@@ -1,7 +1,7 @@
 <use name=root>
 <use name=Geometry/CaloEventSetup>
 <use name=Geometry/CaloGeometry>
-<use name=Geometry/EcalPreshowerAlgo>
+<use name=Geometry/EcalAlgo>
 <use name=Geometry/CaloTopology>
 <use name=DataFormats/HcalDetId>
 <use name=DataFormats/EcalDetId>
