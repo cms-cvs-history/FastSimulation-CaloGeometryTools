@@ -159,14 +159,40 @@ DetId CaloGeometryHelper::getClosestCell(const XYZPoint& point, bool ecal, bool 
   return result;
 }
 
-void CaloGeometryHelper::getWindow(const DetId& pivot,int s1,int s2,std::vector<DetId>& vec) const
+void CaloGeometryHelper::getWindow(const DetId& pivot,int s1,int s2,std::vector<DetId>& vec, bool bGenericAlgorithmEE) const
 {
-  // currently the getWindow method is the same for EcalBarrelTopology and EndcapTopology
-  // (implemented in CaloSubDetectorTopology)
-  // optimized versions are foreseen 
-  vec=getEcalTopology(pivot.subdetId())->getWindow(pivot,s1,s2);
+
+  // This is used if bGenericAlgorithmEE is true. It happens for many layers situation. We consider only 2 layers. This might be generalised.
+   if(pivot.subdetId() == 2 && bGenericAlgorithmEE) { //EE
+      EEDetId did(pivot);
+      //      std::cout << "pivot id "<< did.denseIndex() <<"side "<<did.zside()<<std::endl;    
+      DetId newpivot;  
+      if(fabs(did.zside())==2){
+         EEDetId newdid(did.ix(),did.iy(),did.zside()>0 ? 1:-1);
+         newpivot = newdid.rawId();
+      }
+      else {
+         newpivot = pivot;
+      }
+
+      std::vector <DetId> tmpvec = getEcalTopology(newpivot.subdetId())->getWindow(newpivot,s1,s2);  //save front xstal s1bys2 ids. 
+
+      for(unsigned int i=0;i< tmpvec.size();i++){
+         EEDetId did(tmpvec[i]);
+         EEDetId newdid(did.ix(),did.iy(),did.zside()>0 ? 2:-2);
+         vec.push_back(did.rawId());
+         vec.push_back(newdid.rawId());
+      }
+      tmpvec.clear(); 
+   }
+   else {
+      vec=getEcalTopology(pivot.subdetId())->getWindow(pivot,s1,s2);
+   }
+
   DistanceToCell distance(getEcalGeometry(pivot.subdetId()),pivot);
   sort(vec.begin(),vec.end(),distance);
+
+
 }
 
 void CaloGeometryHelper::buildCrystal(const DetId & cell,Crystal& xtal) const
@@ -179,6 +205,7 @@ void CaloGeometryHelper::buildCrystal(const DetId & cell,Crystal& xtal) const
   if(cell.subdetId()==EcalEndcap)
     {
       xtal=Crystal(cell,&endcapCrystals_[EEDetId(cell).hashedIndex()]);
+      //      std::cout << "Xtal.x() = " << xtal.getCenter().x() << " Xtal.y() = " << xtal.getCenter().y() << std::endl;
       return;
     }     
 }

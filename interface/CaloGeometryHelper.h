@@ -31,7 +31,7 @@ class CaloGeometryHelper:public Calorimeter
   DetId getClosestCell(const XYZPoint& point, bool ecal, bool central) const;
 
   // more user friendly getWindow
-  void getWindow(const DetId& pivot,int s1,int s2,std::vector<DetId> &) const;
+  void getWindow(const DetId& pivot,int s1,int s2,std::vector<DetId> &, bool bGenericAlgorithmEE=false) const;
   
   
   double preshowerZPosition(int layer) const
